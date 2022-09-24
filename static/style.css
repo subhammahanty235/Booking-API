@@ -20,11 +20,12 @@
     /* text-align: center; */
 }
 .red{
-    background-color: red;
+    background-color: purple;
+    color: #fff;
 
 }
 .green{
-    background-color: green;
+    background-color: greenyellow;
 }
 
 #snackbar {
