@@ -46,35 +46,42 @@
         
         const getSeats = async () => {
             let boxes = document.getElementById('boxes');
+            
             const data = await fetch('http://localhost:5100/api/seats/all', {
                 method: 'GET'
             })
             const datam = await data.json();
+
             console.log(datam)
             for (let i = 0; i < datam.length; i++) {
                 boxes.insertAdjacentHTML("beforeend",
 
-                    `<div id=${i} class="smBox" onclick="bookSeat(${i})">${datam[i].serialno}</div>`);
+                    `<div id=${datam[i].serialno} class="smBox" onclick="bookSeat(${datam[i].serialno})">${datam[i].serialno}</div>`);
                 if (datam[i].booked === true) {
-                    document.getElementById(i).className += " red";
+                    document.getElementById(datam[i].serialno).className += " red";
                 }
                 else {
-                    document.getElementById(i).className += " green";
+                    document.getElementById(datam[i].serialno).className += " green";
                 }
 
+
+
             }
-
-
+           
+            
             console.log(datam)
 
         }
-        window.onload(getSeats())
+        window.onload = getSeats
         const bookSeat = async (n) => {
-            const data = await fetch('http://localhost:5100/api/seats/book/' + (n + 1), {
+            const data = await fetch('http://localhost:5100/api/seats/book/'+n, {
                 method: 'PUT'
             })
-            document.getElementById(n).className += " red";
-            alert("Booked Successfully")
+            document.getElementById(n).classList.remove('green')
+            document.getElementById(n).className += ' red'
+
+            // alert("Booked Successfully")
+            // location.reload();
             console.log('Booked')
             
 
